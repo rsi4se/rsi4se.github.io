@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RSI for Science and Engineering · AAAI 2027 Spring Symposium</title>
+<meta name="description" content="AAAI 2027 Spring Symposium on Recursive Self-Improvement for Science and Engineering, March 22–24, 2027, Santa Clara University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --surface: #ffffff;
+    --ink: #1c1d1f;
+    --muted: #5d6066;
+    --line: #e4e1da;
+    --accent: #1f4e79;
+    --accent-soft: #e8eef5;
+    --band: #f2f0ea;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141518;
+      --surface: #1b1d21;
+      --ink: #ecebe7;
+      --muted: #a3a6ad;
+      --line: #2e3137;
+      --accent: #8fb6dd;
+      --accent-soft: #1f2a36;
+      --band: #191b1f;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.65 "Source Serif 4", Georgia, serif;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    font: 500 14px/1 Inter, system-ui, sans-serif;
+  }
+  nav .wrap { display: flex; gap: 22px; overflow-x: auto; padding-top: 14px; padding-bottom: 14px; white-space: nowrap; }
+  nav a { color: var(--muted); }
+  nav a:hover { color: var(--ink); text-decoration: none; }
+
+  header.hero { padding: 72px 0 56px; border-bottom: 1px solid var(--line); }
+  .eyebrow {
+    font: 600 13px/1 Inter, system-ui, sans-serif;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--accent);
+  }
+  h1 { font-size: clamp(32px, 5.4vw, 52px); line-height: 1.12; margin: 16px 0 18px; font-weight: 700; letter-spacing: -.01em; }
+  .lede { font-size: 20px; color: var(--muted); max-width: 720px; margin: 0; }
+  .facts {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px; margin-top: 34px;
+    font: 15px/1.45 Inter, system-ui, sans-serif;
+  }
+  .fact { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .fact b { display: block; font-weight: 600; color: var(--muted); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; }
+
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  section:nth-of-type(even) { background: var(--band); }
+  h2 { font-size: 30px; margin: 0 0 20px; font-weight: 700; }
+  h3 { font: 600 17px/1.4 Inter, system-ui, sans-serif; margin: 26px 0 6px; }
+  p { margin: 0 0 14px; }
+  .questions { counter-reset: q; list-style: none; padding: 0; margin: 22px 0 0; }
+  .questions li {
+    counter-increment: q; position: relative;
+    background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent);
+    border-radius: 8px; padding: 14px 18px 14px 52px; margin-bottom: 12px; font-style: italic;
+  }
+  .questions li::before {
+    content: counter(q); position: absolute; left: 18px; top: 13px;
+    font: 600 16px/1.6 Inter, system-ui, sans-serif; font-style: normal; color: var(--accent);
+  }
+
+  .topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .topic { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .topic h3 { margin: 0 0 6px; }
+  .topic p { margin: 0; font-size: 15.5px; color: var(--muted); }
+
+  .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; font: 14.5px/1.45 Inter, system-ui, sans-serif; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font-weight: 600; background: var(--accent-soft); }
+  tr.quiet td { color: var(--muted); background: var(--band); }
+  td.time { white-space: nowrap; color: var(--muted); }
+  .tbd { color: var(--muted); font-style: italic; }
+  .note { font: 14px/1.5 Inter, system-ui, sans-serif; color: var(--muted); margin-top: 12px; }
+
+  .people { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+  .person { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .person .name { font-weight: 700; font-size: 18px; }
+  .person .aff { color: var(--muted); font-size: 15px; font-style: italic; }
+  .person .tag {
+    display: inline-block; margin-top: 10px; padding: 3px 10px; border-radius: 999px;
+    background: var(--accent-soft); color: var(--accent); font: 500 12.5px/1.5 Inter, system-ui, sans-serif;
+  }
+
+  footer { padding: 36px 0 60px; color: var(--muted); font: 14px/1.6 Inter, system-ui, sans-serif; }
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    header.hero { padding: 48px 0 40px; }
+    .lede { font-size: 18px; }
+    section { padding: 42px 0; }
+    h2 { font-size: 25px; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a href="#about">About</a>
+  <a href="#topics">Topics</a>
+  <a href="#format">Format</a>
+  <a href="#program">Program</a>
+  <a href="#organizers">Organizers</a>
+  <a href="#contact">Contact</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">AAAI 2027 Spring Symposium Series</div>
+  <h1>Recursive Self-Improvement for Science and Engineering</h1>
+  <p class="lede">Self-improving AI for science and engineering, where simulators, solvers, proofs, and experiments supply both the feedback and the evidence.</p>
+  <div class="facts">
+    <div class="fact"><b>Dates</b>March 22–24, 2027</div>
+    <div class="fact"><b>Venue</b>Santa Clara University, Santa Clara, CA</div>
+    <div class="fact"><b>Format</b>In person, two and a half days</div>
+    <div class="fact"><b>Status</b>Proposal under review; details to follow</div>
+  </div>
+</div></header>
+
+<section id="about"><div class="wrap">
+  <h2>About</h2>
+  <p><strong>AI systems are starting to improve themselves.</strong> Language-model agents rewrite their own prompts, memory, tools, and code; evolutionary coding agents keep the program variants that score better on an automatic evaluator; and models trained with reinforcement learning on verifiable rewards improve on problems whose answers can be checked. This loop is known as recursive self-improvement (RSI).</p>
+  <p><strong>Science and engineering are a natural testbed for RSI.</strong> Many scientific and engineering problems come with checks that do not depend on human judgment: a simulator, a conservation law, a numerical solver, a proof checker, a wet-lab assay, or a held-out measurement. These checks supply the reward signal an improving system needs, and they make it possible to tell real progress from reward hacking.</p>
+  <p><strong>The symposium brings together two communities that rarely meet:</strong> AI researchers who build self-improving systems, and the scientists, mathematicians, and engineers whose problems come with reliable checks. Our two guiding questions are:</p>
+  <ol class="questions">
+    <li>How can self-improving AI systems accelerate discovery and design in science and engineering, and how should we measure that they do?</li>
+    <li>What do scientific and engineering problems teach us about building safer and more effective self-improving systems?</li>
+  </ol>
+</div></section>
+
+<section id="topics"><div class="wrap">
+  <h2>Topics</h2>
+  <p>Topics include, but are not limited to:</p>
+  <div class="topics">
+    <div class="topic"><h3>Self-improving agents for discovery and design</h3><p>Agents that revise their own code, tools, prompts, memory, or skill libraries while working on scientific or engineering tasks.</p></div>
+    <div class="topic"><h3>Automated algorithm and method discovery</h3><p>LLM-guided evolutionary and program search for numerical methods, solvers, optimization heuristics, and scientific software.</p></div>
+    <div class="topic"><h3>Learning from verifiable scientific rewards</h3><p>Simulators, physical constraints, formal proofs, and experimental feedback as training signals.</p></div>
+    <div class="topic"><h3>Self-generated curricula and data</h3><p>Self-play, problem generation, and synthetic data for science and mathematics.</p></div>
+    <div class="topic"><h3>Evaluation of RSI</h3><p>Benchmarks that stay informative as systems improve; contamination; reward hacking and verifier exploits.</p></div>
+    <div class="topic"><h3>Closed-loop and embodied discovery</h3><p>Self-improving models coupled with laboratory automation and high-throughput experiments.</p></div>
+    <div class="topic"><h3>Statistical and decision-theoretic foundations</h3><p>Uncertainty quantification and valid inference for results selected by an improving search.</p></div>
+    <div class="topic"><h3>Safety, oversight, and governance</h3><p>Monitoring, sandboxing, and human oversight of self-modifying systems in high-stakes science.</p></div>
+    <div class="topic"><h3>Case studies</h3><p>Physics, chemistry, materials, biology and medicine, climate science, operations research, and engineering.</p></div>
+  </div>
+</div></section>
+
+<section id="format"><div class="wrap">
+  <h2>Format</h2>
+  <p>The symposium follows the AAAI in-person policy: all keynote speakers, presenters, and panelists present in person. We aim for a program in which discussion takes as much time as presentation.</p>
+  <h3>Keynotes</h3>
+  <p>Three one-hour keynotes, one per day, balanced between AI researchers building self-improving systems and domain scientists using AI on problems with strong verifiers.</p>
+  <h3>Contributed talks and posters</h3>
+  <p>Short papers (up to 8 pages including references) and extended abstracts (2 pages) in AAAI style, each reviewed by at least two program committee members. We expect about eight contributed talks and about 35 posters.</p>
+  <h3>Target problems</h3>
+  <p>We will post four to six open problems from science and engineering, each with a public statement, data, and an automatic checker. Participants may bring self-improving systems to these problems before or during the symposium; results, including failures and verifier exploits, are presented on Day 2.</p>
+  <h3>Breakout working groups</h3>
+  <p>Mixed groups led by an AI researcher and a domain scientist discuss (a) evaluating self-improving systems, (b) which tasks have reliable verifiers and how to build them, and (c) oversight and reproducibility of results from self-improving agents.</p>
+  <h3>Panels</h3>
+  <p>Three open-format panels with audience questions, one per day.</p>
+</div></section>
+
+<section id="program"><div class="wrap">
+  <h2>Tentative Program</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Time</th><th>Day 1 · Mar 22</th><th>Day 2 · Mar 23</th><th>Day 3 · Mar 24 (half day)</th></tr></thead>
+    <tbody>
+      <tr><td class="time">9:00–9:30</td><td>Opening remarks; introduction of target problems</td><td>Day-2 overview</td><td>Day-3 overview</td></tr>
+      <tr><td class="time">9:30–10:30</td><td><b>Keynote 1</b> <span class="tbd">TBA</span></td><td><b>Keynote 2</b> <span class="tbd">TBA</span></td><td><b>Keynote 3</b> <span class="tbd">TBA</span></td></tr>
+      <tr class="quiet"><td class="time">10:30–11:00</td><td>Break</td><td>Break</td><td>Break</td></tr>
+      <tr><td class="time">11:00–12:30</td><td><b>Contributed talks 1</b></td><td><b>Contributed talks 2</b></td><td><b>Closing panel:</b> Where should RSI for science and engineering go next?</td></tr>
+      <tr class="quiet"><td class="time">12:30–14:00</td><td>Lunch</td><td>Lunch</td><td>Closing remarks; lunch</td></tr>
+      <tr><td class="time">14:00–15:00</td><td><b>Panel 1:</b> From self-improving AI to self-improving science: does the loop transfer?</td><td><b>Panel 2:</b> Verification as the bottleneck: who checks AI-discovered science?</td><td></td></tr>
+      <tr class="quiet"><td class="time">15:00–15:30</td><td>Break</td><td>Break</td><td></td></tr>
+      <tr><td class="time">15:30–16:30</td><td><b>Breakout working groups</b></td><td><b>Target-problem results and working-group reports</b></td><td></td></tr>
+      <tr><td class="time">16:30–17:30</td><td><b>Poster session 1</b></td><td><b>Poster session 2</b></td><td></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Program, speakers, call for papers, and important dates will be announced here.</p>
+</div></section>
+
+<section id="organizers"><div class="wrap">
+  <h2>Organizers</h2>
+  <div class="people">
+    <div class="person"><div class="name">Huaxiu Yao</div><div class="aff">University of North Carolina at Chapel Hill</div><span class="tag">AI Agents</span></div>
+    <div class="person"><div class="name">Junchi Yan</div><div class="aff">Shanghai Jiao Tong University</div><span class="tag">AI for Science</span></div>
+    <div class="person"><div class="name">Caiming Xiong</div><div class="aff">Recursive</div><span class="tag">Self-Improving AI</span></div>
+    <div class="person"><div class="name">Zeyu Zheng</div><div class="aff">University of California, Berkeley</div><span class="tag">Operations Research</span></div>
+    <div class="person"><div class="name">Xinyu Ye</div><div class="aff">University of North Carolina at Chapel Hill</div><span class="tag">Quantum ML</span></div>
+    <div class="person"><div class="name">Runzhong Wang</div><div class="aff">Massachusetts Institute of Technology</div><span class="tag">Chemistry</span></div>
+    <div class="person"><div class="name">Linjun Zhang</div><div class="aff">Rutgers University</div><span class="tag">Statistics</span></div>
+  </div>
+</div></section>
+
+<footer id="contact"><div class="wrap">
+  Contact: <a href="mailto:xinyuye@cs.unc.edu">xinyuye@cs.unc.edu</a> · Part of the <a href="https://aaai.org/conference/spring-symposia/">AAAI Spring Symposium Series</a>.
+</div></footer>
+
+</body>
+</html>
